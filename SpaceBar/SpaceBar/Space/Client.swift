@@ -33,9 +33,10 @@ public class SpaceClient {
                     print("get todos")
                     completion(resp.data)
                 case .failure(let error):
-//                    sendNotification(body: error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Get ToDos",
+                                     debubMessage: response.debugDescription)
                     completion([TodoItemRecord]())
-                    print(response.debugDescription)
                 }
             }
     }
@@ -53,12 +54,13 @@ public class SpaceClient {
             .validate(statusCode: 200..<300)
             .responseDecodable(of: TodoItemRecord.self) { response in
                 switch response.result {
-                case .success(let resp):
+                case .success(_):
                     completion()
                 case .failure(let error):
-//                    sendNotification(body: error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Create ToDo",
+                                     debubMessage: response.debugDescription)
                     completion()
-                    print(response.debugDescription)
                 }
             }
     }
@@ -72,14 +74,15 @@ public class SpaceClient {
         
         AF.request("https://\(orgName).jetbrains.space/api/http/todo/\(id)", method: .delete, encoding: JSONEncoding.default, headers: headers)
             .validate(statusCode: 200..<300)
-            .responseDecodable(of: Resp<TodoItemRecord>.self) { response in
+            .response() { response in
                 switch response.result {
-                case .success(let resp):
+                case .success(_):
                     completion()
                 case .failure(let error):
-//                    sendNotification(body: error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Delete ToDo item with id \(id)",
+                                     debubMessage: response.debugDescription)
                     completion()
-                    print(response.debugDescription)
                 }
             }
     }
@@ -97,14 +100,16 @@ public class SpaceClient {
         
         AF.request("https://\(orgName).jetbrains.space/api/http/todo/\(todo.id)", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .validate(statusCode: 200..<300)
-            .responseDecodable(of: Resp<TodoItemRecord>.self) { response in
+            .response() { response in
                 switch response.result {
-                case .success(let resp):
+                case .success(_):
                     completion()
                 case .failure(let error):
-//                    sendNotification(body: error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Toggle status of ToDo item",
+                                     debubMessage: response.debugDescription)
                     completion()
-                    print(response.debugDescription)
+             
                 }
             }
     }
@@ -140,9 +145,10 @@ public class SpaceClient {
                 case .success(let resp):
                     completion(resp.data)
                 case .failure(let error):
-//                    sendNotification(body: error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Get issues",
+                                     debubMessage: response.debugDescription)
                     completion([Issue]())
-                    print(response.debugDescription)
                 }
             }
     }
@@ -163,9 +169,10 @@ public class SpaceClient {
                 case .success(let resp):
                     completion(resp)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Get issue statuses",
+                                     debubMessage: response.debugDescription)
                     completion([IssueStatus]())
-                    print(response.debugDescription)
                 }
             }
     }
@@ -180,39 +187,49 @@ public class SpaceClient {
         let parameters = [
             "status": newStatusId,
                 ] as [String: Any]
-//        /api/http/projects/{project}/planning/issues/{issueId}
+        
         AF.request("https://\(orgName).jetbrains.space/api/http/projects/\(projectId)/planning/issues/\(issueId)", method: .patch, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .validate(statusCode: 200..<300)
-            .responseDecodable(of: String.self) { response in
+            .response() { response in
                 switch response.result {
-                case .success(let resp):
+                case .success(_):
                     completion()
                 case .failure(let error):
-//                    sendNotification(body: error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Update issue with id \(issueId) to status \(newStatusId)",
+                                     debubMessage: response.debugDescription)
                     completion()
-//                    print(response.debugDescription)
                 }
             }
     }
     
-    func getCodeReviews(completion:@escaping (([String]) -> Void)) -> Void {
+    func getCodeReviews(type: String = "", completion:@escaping (([String]) -> Void)) -> Void {
         NSLog("Getting Code Reviews")
+        
+        var url = "https://\(orgName).jetbrains.space/api/http/projects/\(projectId)/code-reviews?sorting=UPDATED&descending=true"
+        
+        if type == "reviewRequested" {
+            url += "&reviewer=me"
+        } else if type == "created" {
+            url += "&author=me"
+        }
         
         let headers: HTTPHeaders = [
             .authorization(bearerToken: token),
             .accept("application/json")
         ]
         
-        AF.request("https://\(orgName).jetbrains.space/api/http/projects/\(projectId)/code-reviews?sorting=UPDATED&descending=true&author=me", method: .get, encoding: JSONEncoding.default, headers: headers)
+        AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: Resp<CodeReviewWithCount>.self) { response in
                 switch response.result {
                 case .success(let resp):
                     completion(resp.data.map{ r in r.review.id})
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Get Code Reviews",
+                                     debubMessage: response.debugDescription)
                     completion([String]())
-                    print(response.debugDescription)
                 }
             }
     }
@@ -232,9 +249,11 @@ public class SpaceClient {
                 case .success(let resp):
                     completion(resp)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Get Code Review with id \(id)",
+                                     debubMessage: response.debugDescription)
+
                     completion(nil)
-                    print(response.debugDescription)
                 }
             }
     }
@@ -254,9 +273,10 @@ public class SpaceClient {
                 case .success(let resp):
                     completion(resp.data)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Get projects",
+                                     debubMessage: response.debugDescription)
                     completion([Project]())
-                    print(response.debugDescription)
                 }
             }
     }
@@ -276,11 +296,16 @@ public class SpaceClient {
                 case .success(let resp):
                     completion(resp)
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    self.handleError(error: error,
+                                     notificationSubTitle: "Get project by id: \(id)",
+                                     debubMessage: response.debugDescription)
                     completion(nil)
-                    print(response.debugDescription)
                 }
             }
     }
     
+    private func handleError(error: AFError, notificationSubTitle: String, debubMessage: String) {
+        sendNotification(subtitle: notificationSubTitle, body: error.localizedDescription)
+        NSLog("\(notificationSubTitle): \(debubMessage)")
+    }
 }

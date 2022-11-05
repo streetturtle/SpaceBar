@@ -30,24 +30,8 @@
             filePath = "SpaceBar/Views/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CC997A00-93D2-49C8-95D2-114ACF317E04"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SpaceBar/Views/ContentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -62,8 +46,8 @@
             filePath = "SpaceBar/Space/Model.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "getIssues(statusId:type:)"
             landmarkType = "7">
          </BreakpointContent>

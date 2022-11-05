@@ -31,8 +31,9 @@
 		7672FDCA2900E124005E8D87 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7672FDC92900E124005E8D87 /* KeyChain.swift */; };
 		7672FDCC2900E7F5005E8D87 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7672FDCB2900E7F5005E8D87 /* ToDoView.swift */; };
 		7672FDD029022C66005E8D87 /* NavLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7672FDCF29022C66005E8D87 /* NavLink.swift */; };
-		7672FDD229023A5D005E8D87 /* Dropdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7672FDD129023A5D005E8D87 /* Dropdown.swift */; };
-		76804CDF2908D6EF00CFB58F /* DD2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76804CDE2908D6EF00CFB58F /* DD2.swift */; };
+		76804CE1290F560A00CFB58F /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76804CE0290F560A00CFB58F /* Notifications.swift */; };
+		76804CE32910B03000CFB58F /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76804CE22910B03000CFB58F /* ViewExtension.swift */; };
+		76804CE52914ACD100CFB58F /* IssueStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76804CE42914ACD100CFB58F /* IssueStatusView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,8 +59,9 @@
 		7672FDC92900E124005E8D87 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		7672FDCB2900E7F5005E8D87 /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
 		7672FDCF29022C66005E8D87 /* NavLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavLink.swift; sourceTree = "<group>"; };
-		7672FDD129023A5D005E8D87 /* Dropdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dropdown.swift; sourceTree = "<group>"; };
-		76804CDE2908D6EF00CFB58F /* DD2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DD2.swift; sourceTree = "<group>"; };
+		76804CE0290F560A00CFB58F /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		76804CE22910B03000CFB58F /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		76804CE42914ACD100CFB58F /* IssueStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueStatusView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				7672FD8D28EFB300005E8D87 /* Assets.xcassets */,
 				7672FD8F28EFB300005E8D87 /* Main.storyboard */,
 				7672FD9228EFB300005E8D87 /* SpaceBar.entitlements */,
+				76804CE0290F560A00CFB58F /* Notifications.swift */,
 			);
 			path = SpaceBar;
 			sourceTree = "<group>";
@@ -114,6 +117,7 @@
 				7672FD9828EFB333005E8D87 /* ContentView.swift */,
 				7672FD9F28EFB8A1005E8D87 /* IssuesView.swift */,
 				7672FDBC28F26043005E8D87 /* IssueView.swift */,
+				76804CE42914ACD100CFB58F /* IssueStatusView.swift */,
 				7672FD9B28EFB840005E8D87 /* CodeReviewsView.swift */,
 				7672FDC228F3A4B0005E8D87 /* CodeReviewView.swift */,
 				7672FD9D28EFB881005E8D87 /* ToDosView.swift */,
@@ -121,8 +125,6 @@
 				7672FDC028F2733B005E8D87 /* AboutView.swift */,
 				7672FDB028F25054005E8D87 /* SettingsView.swift */,
 				7672FDCF29022C66005E8D87 /* NavLink.swift */,
-				7672FDD129023A5D005E8D87 /* Dropdown.swift */,
-				76804CDE2908D6EF00CFB58F /* DD2.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -143,6 +145,7 @@
 				7672FDB828F25203005E8D87 /* DefaultsExtension.swift */,
 				7672FDBA28F257B4005E8D87 /* Constants.swift */,
 				7672FDBE28F26211005E8D87 /* ColorExtensions.swift */,
+				76804CE22910B03000CFB58F /* ViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -230,9 +233,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7672FDC328F3A4B0005E8D87 /* CodeReviewView.swift in Sources */,
+				76804CE1290F560A00CFB58F /* Notifications.swift in Sources */,
 				7672FD8A28EFB2FF005E8D87 /* AppDelegate.swift in Sources */,
 				7672FDBF28F26211005E8D87 /* ColorExtensions.swift in Sources */,
-				7672FDD229023A5D005E8D87 /* Dropdown.swift in Sources */,
 				7672FDBB28F257B4005E8D87 /* Constants.swift in Sources */,
 				7672FDB928F25203005E8D87 /* DefaultsExtension.swift in Sources */,
 				7672FDCA2900E124005E8D87 /* KeyChain.swift in Sources */,
@@ -243,11 +246,12 @@
 				7672FDC128F2733B005E8D87 /* AboutView.swift in Sources */,
 				7672FDA328EFB94C005E8D87 /* Dtos.swift in Sources */,
 				7672FD9E28EFB881005E8D87 /* ToDosView.swift in Sources */,
-				76804CDF2908D6EF00CFB58F /* DD2.swift in Sources */,
+				76804CE32910B03000CFB58F /* ViewExtension.swift in Sources */,
 				7672FDD029022C66005E8D87 /* NavLink.swift in Sources */,
 				7672FD9C28EFB840005E8D87 /* CodeReviewsView.swift in Sources */,
 				7672FDCC2900E7F5005E8D87 /* ToDoView.swift in Sources */,
 				7672FDBD28F26043005E8D87 /* IssueView.swift in Sources */,
+				76804CE52914ACD100CFB58F /* IssueStatusView.swift in Sources */,
 				7672FDAF28F1168D005E8D87 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

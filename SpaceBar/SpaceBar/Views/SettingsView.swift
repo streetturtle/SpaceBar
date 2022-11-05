@@ -26,13 +26,13 @@ struct SettingsView: View {
             Section {
                 VStack(alignment: .leading) {
                     HStack(alignment: .center) {
-                        Text("Organization:").frame(width: 100, alignment: .trailing)
+                        Text("Organization:").frame(width: 90, alignment: .trailing)
                         TextField("", text: $orgNameFieldValue)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .disableAutocorrection(true)
                             .textContentType(.password)
                             .multilineTextAlignment(.trailing)
-                            .frame(width: 120)
+                            .frame(width: 140)
                             .onAppear {
                                 orgNameFieldValue = orgName
                             }
@@ -45,11 +45,18 @@ struct SettingsView: View {
                     }
                     
                     HStack(alignment: .center) {
+                        Text("Required\nPermissions:")
+                            .frame(width: 90, alignment: .trailing)
+                        Text("Manage issue settings, Read Git repositories, Update issues, View code reviews, View issues, View project details")
+                            .padding()
+                    }
+                    
+                    HStack(alignment: .center) {
                         Text("Token:")
-                            .frame(width: 100, alignment: .trailing)
+                            .frame(width: 90, alignment: .trailing)
                         VStack {
                             TextEditor(text: $token)
-                                .frame(width: 250, height: 150)
+                                .frame(height: 150)
                                 .padding(8)
                                 .onChange(of: token) { _ in
                                     model.getProjects()

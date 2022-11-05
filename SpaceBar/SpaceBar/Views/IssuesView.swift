@@ -8,13 +8,12 @@
 import SwiftUI
 import SkeletonUI
 
-
 struct IssuesView: View {
-    @State var model: Model
+    @StateObject var model: Model
     @Binding var selectedStatusId: String
     @Binding var selectedType: String
     @State private var hoveringOver = false
-
+    
     var body: some View {
         VStack(spacing: 0) {
             
@@ -23,7 +22,7 @@ struct IssuesView: View {
             }
             
             HStack(alignment: .bottom) {
-                HStack {
+                HStack(spacing: 0) {
                     Button(action: {
                         if selectedType == "assigned"
                         {
@@ -33,19 +32,19 @@ struct IssuesView: View {
                             model.getIssues(statusId: selectedStatusId, type: "assigned")
                             selectedType = "assigned"
                         }
-
+                        
                     })
                     {
-                    Text("Assigned")
-                        .padding([.leading, .trailing], 4)
-                        .padding([.top, .bottom], 2)
-                        .foregroundColor(.secondary)
-                        .background(RoundedRectangle(cornerRadius: 50, style: .continuous).fill(selectedType == "assigned" ? Color.secondary.opacity(0.5) : Color.red.opacity(0)))
-                        .font(.subheadline)
-                        .padding([.top, .bottom], 8)
+                        Text("Assigned")
+                            .padding([.leading, .trailing], 4)
+                            .padding([.top, .bottom], 2)
+                            .foregroundColor(.secondary)
+                            .background(selectedType == "assigned" ? Color.secondary.opacity(0.5) : Color.red.opacity(0))
+                            .roundedCorners(radius: 10, corners: [.topLeft, .bottomLeft])
+                            .font(.subheadline)
                     }
                     .buttonStyle(PlainButtonStyle())
-
+                    
                     Button(action: {
                         if selectedType == "created"
                         {
@@ -55,24 +54,28 @@ struct IssuesView: View {
                             model.getIssues(statusId: selectedStatusId, type: "created")
                             selectedType = "created"
                         }
-
+                        
                     })
                     {
-                    Text("Created")
-                        .padding([.leading, .trailing], 4)
-                        .padding([.top, .bottom], 2)
-                        .foregroundColor(.secondary)
-                        .background(RoundedRectangle(cornerRadius: 50, style: .continuous).fill(selectedType == "created" ? Color.secondary.opacity(0.5) : Color.red.opacity(0)))
-                        .font(.subheadline)
-                        .padding([.top, .bottom], 8)
+                        Text("Created")
+                            .padding([.leading, .trailing], 4)
+                            .padding([.top, .bottom], 2)
+                            .foregroundColor(.secondary)
+                            .background(selectedType == "created" ? Color.secondary.opacity(0.5) : Color.red.opacity(0))
+                            .roundedCorners(radius: 10, corners: [.topRight, .bottomRight])
+                            .font(.subheadline)
                     }
                     .buttonStyle(PlainButtonStyle())
                 }
+                .overlay(RoundedRectangle(cornerRadius: 50).stroke(Color.secondary))
+                .padding([.top, .bottom], 8)
+                
                 
                 Spacer()
                 
-                HStack(spacing: 4) {
+                HStack(spacing: 0) {
                     ForEach(Constants.issueStatuses, id: \.id) { status in
+                        
                         Button(action: {
                             if selectedStatusId == status.id {
                                 model.getIssues(type: selectedType)
@@ -86,18 +89,32 @@ struct IssuesView: View {
                             Text(status.name)
                                 .padding([.leading, .trailing], 4)
                                 .padding([.top, .bottom], 2)
-                                .background(RoundedRectangle(cornerRadius: 50, style: .continuous).fill(selectedStatusId == status.id ? Color(hex: status.color) : Color.red.opacity(0)))
+                                .background(selectedStatusId == status.id ? Color(hex: status.color) : Color.red.opacity(0))
+                                .roundedCorners(radius: 10, corners: getCorners(status: status)
+                                )
                                 .foregroundColor(.secondary)
                                 .font(.subheadline)
                             
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
-                    .padding([.top, .bottom], 8)
                 }
+                .overlay(RoundedRectangle(cornerRadius: 50).stroke(Color.secondary))
+                .padding([.top, .bottom], 8)
+                
             }
             .padding([.leading, .trailing], 16)
             
+        }
+    }
+    
+    func getCorners(status: IssueStatus) -> RectCorner {
+        if (Constants.issueStatuses.first?.id == status.id) {
+            return [.topLeft, .bottomLeft]
+        } else if (Constants.issueStatuses.last?.id == status.id) {
+            return [.topRight, .bottomRight]
+        } else {
+            return []
         }
     }
 }

@@ -13,7 +13,8 @@ struct ContentView: View {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State var selectedStatusId = ""
     @State var type = "assigned"
-    @StateObject var model = Model()
+    @State var cRType = "reviewRequested"
+    @StateObject var model: Model
     
     @Default(.orgName) var orgName
     @Default(.projectId) var projectId
@@ -38,7 +39,6 @@ struct ContentView: View {
                         .pickerStyle(MenuPickerStyle())
                         .frame(width: 140)
                         .onAppear{
-//                            self.model.projects.removeAll()
                             self.model.getProjects()
                         }
                         .onChange(of: projectId) { id in
@@ -54,7 +54,7 @@ struct ContentView: View {
                         NavLink(text: "Issues", count: "\(model.issues.count)", systemName: "staroflife.fill")
                     }
                     
-                    NavigationLink(destination: CodeReviewsView(model: model),
+                    NavigationLink(destination: CodeReviewsView(model: model, selectedCrType: $cRType),
                                    tag: "2",
                                    selection: $model.selected) {
                         NavLink(text: "Code Reviews", count: "\(model.codeReviews.count)", systemName: "highlighter")
@@ -63,7 +63,7 @@ struct ContentView: View {
                     NavigationLink(destination: ToDosView(model: model),
                                    tag: "3",
                                    selection: $model.selected) {
-                        NavLink(text: "ToDos", count: "\(model.todos.count)", systemName: "checkmark.square") }
+                        NavLink(text: "ToDos", count: "\(model.todos.count)", systemName: "bolt.fill") }
                 }
                 
                 Section("App"){
@@ -79,23 +79,9 @@ struct ContentView: View {
             .frame(width: 180)
             
             Text("No selection")
-            //                DropdownSelector(
-            //                    selectedOption: DropdownOption(key: "2", value: "Monday"),
-            //                    placeholder: "Day of the week",
-            //                    options: [
-            //                        DropdownOption(key: "1", value: "Sunday"),
-            //                        DropdownOption(key: "2", value: "Monday"),
-            //                        DropdownOption(key: "3", value: "Tuesday"),
-            //                        DropdownOption(key: "4", value: "Wednesday"),
-            //                        DropdownOption(key: "5", value: "Thursday"),
-            //                        DropdownOption(key: "6", value: "Friday")],
-            //                    onOptionSelected: { option in
-            //                        print(option)
-            //                    })
-            //                    .padding(.horizontal)
-            //            }
-            //
         }.onAppear {
+            NSLog("Content view appeare")
+            model.initialize()
             model.refresh()
         }
     }

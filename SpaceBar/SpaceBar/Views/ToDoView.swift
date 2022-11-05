@@ -25,7 +25,7 @@ struct TodoView: View {
             }) {
                 Image(systemName: (todo?._status == "Open") ? "square" : "checkmark.square")
                     .resizable()
-                    .frame(width: 18, height: 18)
+                    .frame(width: 16, height: 16)
                     .padding(.top, 1)
             }.buttonStyle(PlainButtonStyle())
                 .skeleton(with: loading)
@@ -51,7 +51,7 @@ struct TodoView: View {
                     if isHovering {
                     Image(systemName: "trash")
                         .resizable()
-                        .frame(width: 18, height: 18)
+                        .frame(width: 16, height: 16)
                         .padding(.top, 1)
                         .foregroundColor(.red)
                     }

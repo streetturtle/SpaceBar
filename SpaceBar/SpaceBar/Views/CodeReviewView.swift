@@ -13,7 +13,6 @@ struct CodeReviewView: View {
     @State private var isHovering = false
     
     var codeReview: CodeReviewRecord?
-    var loading: Bool
     
     var body: some View {
         Link(destination: URL(string: "https://\(orgName).jetbrains.space/p/spcbr/reviews/\(String(codeReview?.number ?? 1))")!) {
@@ -24,10 +23,8 @@ struct CodeReviewView: View {
                         .foregroundColor(.primary)
                         .multilineTextAlignment(.leading)
                         .font(.headline)
-                        .skeleton(with: loading)
                     Text("#" + String(codeReview?.number ?? 1))
                         .foregroundColor(.secondary)
-                        .skeleton(with: loading)
                 }
                 
                 HStack(spacing: 20) {
@@ -38,7 +35,6 @@ struct CodeReviewView: View {
                         .overlay(RoundedRectangle(cornerRadius: 50).stroke(isHovering ? Color.black : Color.blue))
                         .foregroundColor(.secondary)
                         .font(.subheadline)
-                        .skeleton(with: loading)
                     
                     HStack(spacing: 2) {
                         Text(codeReview?.branchPairs.first?.targetBranch)
@@ -46,14 +42,12 @@ struct CodeReviewView: View {
                             .padding([.top, .bottom], 2)
                             .foregroundColor(isHovering ? Color.black : Color.blue)
                             .background(RoundedRectangle(cornerRadius: 50, style: .continuous).fill(Color.secondary.opacity(0.3)))
-                            .skeleton(with: loading)
                         Image(systemName: "arrow.left")
                         Text(codeReview?.branchPairs.first?.sourceBranch)
                             .padding([.leading, .trailing], 4)
                             .padding([.top, .bottom], 2)
                             .foregroundColor(isHovering ? Color.black : Color.blue)
                             .background(RoundedRectangle(cornerRadius: 50, style: .continuous).fill(Color.secondary.opacity(0.3)))
-                            .skeleton(with: loading)
                     }
                 }
             }
@@ -74,6 +68,6 @@ struct CodeReviewView: View {
 
 struct CodeReviewView_Previews: PreviewProvider {
     static var previews: some View {
-        CodeReviewView(loading: false)
+        CodeReviewView()
     }
 }

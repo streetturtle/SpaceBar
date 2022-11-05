@@ -14,7 +14,6 @@ struct IssueView: View {
     @Default(.orgName) var orgName
     @State private var isHovering = false
     
-    
     @State var issue: Issue?
     @State var model: Model
     
@@ -31,27 +30,7 @@ struct IssueView: View {
                         .foregroundColor(.secondary)
                 }
             }
-            Menu {
-                ForEach(Constants.issueStatuses) {status in
-                    Button(status.name, action:{
-                        SpaceClient().updateIssueStatus(issueId: issue?.id ?? "", newStatusId: status.id) {
-                            issue?.status.id = status.id
-                        }
-                    })
-                }
-            }
-            label: {
-                Text(Constants.issueStatuses.filter{i in i.id == issue?.status.id}.first?.name ?? "")
-                    .font(.subheadline)
-            }
-            .scaledToFit()
-            .menuStyle(BorderlessButtonMenuStyle())
-            .padding([.leading, .trailing], 4)
-            .padding([.top, .bottom], 2)
-            .background(
-                RoundedRectangle(cornerRadius: 50, style: .continuous).fill(Color(hex: (Constants.issueStatuses.filter{i in i.id == issue?.status.id}.first?.color ?? "333333")))
-            )
-            .foregroundColor(.secondary)
+            IssueStatusView(issue: issue!)
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)

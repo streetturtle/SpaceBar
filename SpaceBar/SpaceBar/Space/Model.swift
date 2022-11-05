@@ -21,9 +21,7 @@ class Model: ObservableObject{
     @Published var iconName: String?
     @Published var selected: String?
 
-
-    init(){
-        NSLog("Model initialization")
+    func initialize() {
         client.getIssueStatuses{ resp in
             Constants.issueStatuses = resp
         }
@@ -40,6 +38,9 @@ class Model: ObservableObject{
         getTodos()
         getIssues(type: "assigned")
         getCodeReviews()
+        client.getIssueStatuses{ resp in
+            Constants.issueStatuses = resp
+        }
     }
     
     func getTodos() {
@@ -48,11 +49,6 @@ class Model: ObservableObject{
                 $0._status > $1._status
             }
         }
-    }
-    
-    func clear() {
-        self.todos = []
-        self.issues = []
     }
     
     func getProjects() {
@@ -67,9 +63,9 @@ class Model: ObservableObject{
         }
     }
     
-    func getCodeReviews() {
-        self.codeReviews.removeAll()
-        client.getCodeReviews() { crIds in
+    func getCodeReviews(type: String = "") {
+        client.getCodeReviews(type: type) { crIds in
+            self.codeReviews.removeAll()
             crIds.forEach { id in
                 self.client.getCodeReview(id: id) { cr in
                     if let codeReview = cr {

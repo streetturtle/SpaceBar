@@ -12,7 +12,8 @@ struct ToDosView: View {
     private let spaceClient = SpaceClient()
     var model: Model
     @State private var asd: String = ""
-
+    
+    private let text = "Add a task (**bold**, _italic_, [link text](link))"
     
     var body: some View {
         VStack {
@@ -20,24 +21,23 @@ struct ToDosView: View {
                 TodoView(todo: todo, loading: loading, model: model)
             }
             
-            TextField("Add a task", text: $asd)
-                                .padding(.vertical, 8)
-                                .padding(.horizontal, 8)
-                                .padding(.leading, 22)
-                                .background(Color("textFieldBackgroundTransparent"))
-                                .cornerRadius(8)
-                                .textFieldStyle(PlainTextFieldStyle())
-                                .overlay(
-                                    Image(systemName: "plus.circle.fill")
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .foregroundColor(.gray)
-                                        .padding(.leading, 8)
-                                ).onSubmit {
-                                    spaceClient.createTodo(text: asd) { 
-                                        model.getTodos()
-                                    }
-                                    asd = ""
-                                }
+            TextField(text, text: $asd)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 8)
+                .padding(.leading, 22)
+                .cornerRadius(8)
+                .textFieldStyle(PlainTextFieldStyle())
+                .overlay(
+                    Image(systemName: "plus.circle.fill")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(.gray)
+                        .padding(.leading, 8)
+                ).onSubmit {
+                    spaceClient.createTodo(text: asd) {
+                        model.getTodos()
+                    }
+                    asd = ""
+                }
             
         }.padding(8)
     }

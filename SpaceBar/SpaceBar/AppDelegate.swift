@@ -17,7 +17,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let client = SpaceClient()
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let contentView = ContentView()
+
+        let model = Model()
+        let contentView = ContentView(model: model)
 
         let popover = NSPopover()
         popover.contentSize = NSSize(width: 600, height: 400)
