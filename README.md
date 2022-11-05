@@ -10,6 +10,7 @@ This app is created for the [Space Apps Contest 2022](https://plugins.jetbrains.
 
 ## Features
 
+ - supports multiple projects
  - issues
    - open issue on click
    - change issue status
@@ -23,7 +24,7 @@ This app is created for the [Space Apps Contest 2022](https://plugins.jetbrains.
     
 ## Instalation
 
-Generate a token with following permissions:
+Download [the latest release](https://github.com/streetturtle/SpaceBar/releases/download/v1.0/SpaceBar.1.0.dmg) and install it. Then generate a token in Space with following permissions:
  - Manage issue settings,
  - Read Git repositories,
  - Update issues,
