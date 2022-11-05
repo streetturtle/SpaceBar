@@ -10,9 +10,6 @@ import Alamofire
 import Defaults
 import KeychainAccess
 
-
-//let token = "eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiIzUEtleWUzSmp3aGwiLCJhdWQiOiJjaXJjbGV0LXdlYi11aSIsIm9yZ0RvbWFpbiI6InN0cmVldHR1cnRsZSIsIm5hbWUiOiJzdHJlZXR0dXJ0bGUiLCJpc3MiOiJodHRwczpcL1wvc3RyZWV0dHVydGxlLmpldGJyYWlucy5zcGFjZSIsInBlcm1fdG9rZW4iOiJOZlRhUzF5S2gwdiIsInByaW5jaXBhbF90eXBlIjoiVVNFUiIsImlhdCI6MTY2NTEwOTA2MX0.QUES1eajVtqmdcJkU4In7qymNqFHXhNNrAxPMPd8rJAoAJbHVutc5FSV4tnzvJ3wibr8RJBUpIz3Q9p6ZBlP_AkpguN_VTbb2ytyLRIXCt8PAcdojI223lWMrlXs6DsARuUFJV1Qu2zmTQwhFRqGsd127gGMo5ESnx6apKIfxn8"
-
 public class SpaceClient {
     @Default(.orgName) var orgName
     @Default(.projectId) var projectId
