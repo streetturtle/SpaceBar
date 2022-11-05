@@ -6,6 +6,8 @@ MacOS menu bar application for JetBrains Space:
   <img width="630" alt="Screen Shot 2022-11-05 at 3 21 03 PM" src="https://user-images.githubusercontent.com/9363150/200137309-2dd633ad-ad3a-4f17-9a18-8ec4dddac748.png">
 </p>
 
+This app is created for the [Space Apps Contest 2022](https://plugins.jetbrains.com/contest/space/2022)
+
 ## Features
 
  - issues
