@@ -7,7 +7,7 @@ MacOS menu bar application for JetBrains Space:
 </p>
 
 ## Features
- 
+
  - issues
    - open issue on click
    - change issue status
@@ -19,3 +19,21 @@ MacOS menu bar application for JetBrains Space:
     - toggle state: done / undone
     - delete todo item
     
+## Instalation
+
+Generate a token with following permissions:
+ - Manage issue settings,
+ - Read Git repositories,
+ - Update issues,
+ - View code reviews,
+ - View issues,
+ - View project details
+
+Then paste it in the settings tab with your space org:
+
+<p align="center">
+  <img width="630" alt="Screen Shot 2022-11-05 at 3 26 58 PM" src="https://user-images.githubusercontent.com/9363150/200137545-efcbb21f-d9d1-47d1-bc66-77897c37d420.png">
+</p>
+
+Note that the token is securely stored in macOS keychain, so when starting the application you will you will neet to type your password in a prompt. This is done to allow the app to store and read token from the keychain.
+
