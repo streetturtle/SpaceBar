@@ -15,6 +15,7 @@ struct NavLink: View {
     var body: some View {
         Label {
             Text(text)
+            Spacer()
             Text(count)
                 .foregroundColor(Color.secondary)
             
