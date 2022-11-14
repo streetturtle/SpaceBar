@@ -42,12 +42,14 @@ struct CodeReviewView: View {
                             .padding([.top, .bottom], 2)
                             .foregroundColor(isHovering ? Color.black : Color.blue)
                             .background(RoundedRectangle(cornerRadius: 50, style: .continuous).fill(Color.secondary.opacity(0.3)))
+                            .font(.subheadline)
                         Image(systemName: "arrow.left")
                         Text(codeReview?.branchPairs.first?.sourceBranch)
                             .padding([.leading, .trailing], 4)
                             .padding([.top, .bottom], 2)
                             .foregroundColor(isHovering ? Color.black : Color.blue)
                             .background(RoundedRectangle(cornerRadius: 50, style: .continuous).fill(Color.secondary.opacity(0.3)))
+                            .font(.subheadline)
                     }
                 }
             }

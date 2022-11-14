@@ -9,9 +9,10 @@ import SwiftUI
 import SkeletonUI
 
 struct IssuesView: View {
-    @StateObject var model: Model
-    @Binding var selectedStatusId: String
-    @Binding var selectedType: String
+    @ObservedObject var model: Model
+
+//    @Binding var selectedStatusId: String
+//    @Binding var selectedType: String
     @State private var hoveringOver = false
     
     var body: some View {
@@ -24,13 +25,13 @@ struct IssuesView: View {
             HStack(alignment: .bottom) {
                 HStack(spacing: 0) {
                     Button(action: {
-                        if selectedType == "assigned"
+                        if model.selectedType == "assigned"
                         {
-                            model.getIssues(statusId: selectedStatusId)
-                            selectedType = ""
+                            model.selectedType = ""
+                            model.getIssues()
                         } else {
-                            model.getIssues(statusId: selectedStatusId, type: "assigned")
-                            selectedType = "assigned"
+                            model.selectedType = "assigned"
+                            model.getIssues()
                         }
                         
                     })
@@ -39,20 +40,20 @@ struct IssuesView: View {
                             .padding([.leading, .trailing], 4)
                             .padding([.top, .bottom], 2)
                             .foregroundColor(.secondary)
-                            .background(selectedType == "assigned" ? Color.secondary.opacity(0.5) : Color.red.opacity(0))
+                            .background(model.selectedType == "assigned" ? Color.secondary.opacity(0.5) : Color.red.opacity(0))
                             .roundedCorners(radius: 10, corners: [.topLeft, .bottomLeft])
                             .font(.subheadline)
                     }
                     .buttonStyle(PlainButtonStyle())
                     
                     Button(action: {
-                        if selectedType == "created"
+                        if model.selectedType == "created"
                         {
-                            model.getIssues(statusId: selectedStatusId)
-                            selectedType = ""
+                            model.selectedType = ""
+                            model.getIssues()
                         } else {
-                            model.getIssues(statusId: selectedStatusId, type: "created")
-                            selectedType = "created"
+                            model.selectedType = "created"
+                            model.getIssues()
                         }
                         
                     })
@@ -61,7 +62,7 @@ struct IssuesView: View {
                             .padding([.leading, .trailing], 4)
                             .padding([.top, .bottom], 2)
                             .foregroundColor(.secondary)
-                            .background(selectedType == "created" ? Color.secondary.opacity(0.5) : Color.red.opacity(0))
+                            .background(model.selectedType == "created" ? Color.secondary.opacity(0.5) : Color.red.opacity(0))
                             .roundedCorners(radius: 10, corners: [.topRight, .bottomRight])
                             .font(.subheadline)
                     }
@@ -77,19 +78,19 @@ struct IssuesView: View {
                     ForEach(Constants.issueStatuses, id: \.id) { status in
                         
                         Button(action: {
-                            if selectedStatusId == status.id {
-                                model.getIssues(type: selectedType)
-                                selectedStatusId = ""
+                            if model.selectedStatusId == status.id {
+                                model.selectedStatusId = ""
+                                model.getIssues()
                             } else {
-                                model.getIssues(statusId: status.id, type: selectedType)
-                                selectedStatusId = status.id
+                                model.selectedStatusId = status.id
+                                model.getIssues()
                             }
                         })
                         {
                             Text(status.name)
                                 .padding([.leading, .trailing], 4)
                                 .padding([.top, .bottom], 2)
-                                .background(selectedStatusId == status.id ? Color(hex: status.color) : Color.red.opacity(0))
+                                .background(model.selectedStatusId == status.id ? Color(hex: status.color) : Color.red.opacity(0))
                                 .roundedCorners(radius: 10, corners: getCorners(status: status)
                                 )
                                 .foregroundColor(.secondary)

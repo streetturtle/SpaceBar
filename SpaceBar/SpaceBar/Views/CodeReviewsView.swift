@@ -10,7 +10,7 @@ import SkeletonUI
 
 struct CodeReviewsView: View {
     
-    @StateObject var model: Model
+    @ObservedObject var model: Model
     
     @Binding var selectedCrType: String
     

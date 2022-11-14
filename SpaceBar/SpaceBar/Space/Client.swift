@@ -27,7 +27,6 @@ public class SpaceClient {
             .responseDecodable(of: Resp<TodoItemRecord>.self) { response in
                 switch response.result {
                 case .success(let resp):
-                    print("get todos")
                     completion(resp.data)
                 case .failure(let error):
                     self.handleError(error: error,
@@ -131,7 +130,6 @@ public class SpaceClient {
         } else if type == "created" {
             url += "&createdByProfileId=me"
         }
-        print(url)
         AF.request(url,
                    method: .get,
                    encoding: JSONEncoding.default,

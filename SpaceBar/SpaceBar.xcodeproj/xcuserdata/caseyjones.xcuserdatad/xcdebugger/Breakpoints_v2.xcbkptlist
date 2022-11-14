@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CEEEDE80-F474-4A34-AA38-BDABD448C026"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SpaceBar/AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "applicationDidFinishLaunching(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "91BB166C-1895-4981-8BA6-2566B9355E8D"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -46,8 +30,8 @@
             filePath = "SpaceBar/Space/Model.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "getIssues(statusId:type:)"
             landmarkType = "7">
          </BreakpointContent>

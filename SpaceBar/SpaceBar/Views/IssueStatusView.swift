@@ -12,13 +12,15 @@ struct IssueStatusView: View {
     @State private var isHovering = false
     
     @State var issue: Issue
-    
+    @ObservedObject var model: Model
     var body: some View {
         Menu {
             ForEach(Constants.issueStatuses) {status in
                 Button(status.name, action:{
                     SpaceClient().updateIssueStatus(issueId: issue.id, newStatusId: status.id) {
+                        model.getIssues()
                         issue.status.id = status.id
+                        
                     }
                 })
             }

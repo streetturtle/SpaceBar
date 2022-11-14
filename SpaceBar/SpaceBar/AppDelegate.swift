@@ -13,13 +13,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
    
     var popover: NSPopover!
     var statusBarItem: NSStatusItem!
-    @StateObject var model = Model()
+    @ObservedObject var model = Model()
     let client = SpaceClient()
+    var contentView: ContentView?
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 
-        let model = Model()
-        let contentView = ContentView(model: model)
+//        let model = Model()
+        contentView = ContentView(model: self.model)
 
         let popover = NSPopover()
         popover.contentSize = NSSize(width: 600, height: 400)
@@ -31,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         if let button = self.statusBarItem.button {
             let logo = NSImage(named: "space-logo")
-            logo?.size = NSSize(width: 16, height: 18)
+            logo?.size = NSSize(width: 18, height: 18)
             button.image = NSImage(named: "space-logo")
             button.action = #selector(togglePopover(_:))
         }
@@ -49,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             if self.popover.isShown {
                 self.popover.performClose(sender)
             } else {
-                model.refresh();
+                self.model.refresh();
                 self.popover.show(relativeTo: button.bounds, of: button, preferredEdge: NSRectEdge.minY)
             }
         }

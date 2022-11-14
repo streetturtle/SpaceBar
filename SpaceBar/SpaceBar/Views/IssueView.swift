@@ -15,8 +15,8 @@ struct IssueView: View {
     @State private var isHovering = false
     
     @State var issue: Issue?
-    @State var model: Model
-    
+    @ObservedObject var model: Model
+
     var body: some View {
         
         VStack(alignment: .leading, spacing: 3) {
@@ -28,9 +28,15 @@ struct IssueView: View {
                         .font(.headline)
                     Text("#" + String(issue?.number ?? 1))
                         .foregroundColor(.secondary)
+                        .font(.subheadline)
                 }
             }
-            IssueStatusView(issue: issue!)
+            HStack {
+                IssueStatusView(issue: issue!, model: model)
+                Text("created by \(issue?.createdBy.name ?? "")")
+                    .foregroundColor(.secondary)
+                    .font(.subheadline)
+            }
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)

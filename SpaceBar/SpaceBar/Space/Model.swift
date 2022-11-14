@@ -20,7 +20,14 @@ class Model: ObservableObject{
     @Published var projectName: String = ""
     @Published var iconName: String?
     @Published var selected: String?
+    
+    @Published var selectedStatusId: String = ""
+    @Published var selectedType: String = ""
 
+    init() {
+        NSLog("Model initialized")
+    }
+    
     func initialize() {
         client.getIssueStatuses{ resp in
             Constants.issueStatuses = resp
@@ -58,7 +65,7 @@ class Model: ObservableObject{
     }
     
     func getIssues(statusId: String = "", type: String = "") {
-        client.getIssues(statusId: statusId, type: type) { ps in
+        client.getIssues(statusId: selectedStatusId, type: selectedType) { ps in
             self.issues = ps
         }
     }

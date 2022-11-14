@@ -14,7 +14,7 @@ struct ContentView: View {
     @State var selectedStatusId = ""
     @State var type = "assigned"
     @State var cRType = "reviewRequested"
-    @StateObject var model: Model
+    @ObservedObject var model: Model
     
     @Default(.orgName) var orgName
     @Default(.projectId) var projectId
@@ -43,12 +43,14 @@ struct ContentView: View {
                         }
                         .onChange(of: projectId) { id in
                             model.selected = ""
+                            model.selectedType = ""
+                            model.selectedStatusId = ""
                             model.refresh()
                         }
                     
                 }
                 Section ("Features") {
-                    NavigationLink(destination: IssuesView(model: model, selectedStatusId: $selectedStatusId, selectedType: $type),
+                    NavigationLink(destination: IssuesView(model: model),
                                    tag: "1",
                                    selection: $model.selected) {
                         NavLink(text: "Issues", count: "\(model.issues.count)", systemName: "staroflife.fill")
@@ -78,11 +80,19 @@ struct ContentView: View {
             .listStyle(.sidebar)
             .frame(width: 180)
             
-            Text("No selection")
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Image("Untitled")
+                        .resizable()
+                        .frame(width: 150, height: 150)
+                        .opacity(0.5)
+                }
+            }
+                
         }.onAppear {
-            NSLog("Content view appeare")
-            model.initialize()
-            model.refresh()
+            NSLog("Content view appeared")
         }
     }
 }

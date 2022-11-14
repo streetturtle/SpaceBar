@@ -47,12 +47,14 @@ struct Issue: Codable, Identifiable, Hashable {
     var title: String
     var status: FieldWithId
     var number: Int
+    var createdBy: User
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case number
         case status
+        case createdBy
     }
 }
 
@@ -137,5 +139,13 @@ struct Project: Codable, Hashable, Identifiable, Defaults.Serializable {
         case id
         case name
         case icon
+    }
+}
+
+struct User: Codable, Hashable {
+    var name: String
+    
+    enum CodlingKeys: String, CodingKey {
+        case name
     }
 }

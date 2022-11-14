@@ -11,7 +11,7 @@ import SkeletonUI
 struct ToDosView: View {
     private let spaceClient = SpaceClient()
     var model: Model
-    @State private var asd: String = ""
+    @State private var newTodo: String = ""
     
     private let text = "Add a task (**bold**, _italic_, [link text](link))"
     
@@ -21,7 +21,7 @@ struct ToDosView: View {
                 TodoView(todo: todo, loading: loading, model: model)
             }
             
-            TextField(text, text: $asd)
+            TextField(text, text: $newTodo)
                 .padding(.vertical, 8)
                 .padding(.horizontal, 8)
                 .padding(.leading, 22)
@@ -33,13 +33,13 @@ struct ToDosView: View {
                         .foregroundColor(.gray)
                         .padding(.leading, 8)
                 ).onSubmit {
-                    spaceClient.createTodo(text: asd) {
+                    spaceClient.createTodo(text: newTodo) {
                         model.getTodos()
                     }
-                    asd = ""
-                }
+                    newTodo = ""
+                }.padding(.bottom, 8)
             
-        }.padding(8)
+        }
     }
 }
 
