@@ -80,14 +80,19 @@ struct ContentView: View {
             .listStyle(.sidebar)
             .frame(width: 180)
             
-            VStack {
-                Spacer()
-                HStack {
+            ZStack {
+                Text("No selection")
+                    .foregroundColor(.secondary)
+                    .font(.headline)
+                VStack {
                     Spacer()
-                    Image("Untitled")
-                        .resizable()
-                        .frame(width: 150, height: 150)
-                        .opacity(0.5)
+                    HStack {
+                        Spacer()
+                        Image("Untitled")
+                            .resizable()
+                            .frame(width: 150, height: 150)
+                            .opacity(0.5)
+                    }
                 }
             }
                 
